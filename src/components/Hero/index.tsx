@@ -149,9 +149,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero relative bg-gradient-to-t from-red-500 to-foreground">
-      <canvas ref={canvasRef} className="w-full h-full object-cover grayscale-90 -z-1 " />
-      <div className="w-full py-2 transform-3d perspective-distant h-full fixed top-0">
+    <section className="hero relative ">
+      <div className="absolute top-0 left-0 w-full h-full z-10 bg-gradient-to-t from-background/70 to-background/0"></div>
+      <canvas ref={canvasRef} className="w-full h-full object-cover grayscale-80 -z-1 " />
+      <div className="w-full py-2 z-20 transform-3d perspective-distant h-full fixed top-0">
         <div ref={contentRef} className="absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full origin-center will-change-transform text-background">
           <h1 className="text-[11rem] leading-[105%] mb-[1rem] font-bold -tracking-two">BOLD IDEAS. <br /> BRILLIANT DESIGN.</h1>
 
