@@ -15,7 +15,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 
 const FRAME_COUNT = 40;
 
@@ -26,6 +25,8 @@ function currentFrame(index: number) {
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
+  const contentRef = useRef<HTMLDivElement | null>(null)
+
   const videoFrames = useRef({ frame: 0 });
 
   // Set canvas size, scales for devicePixelRatio
@@ -78,15 +79,6 @@ export default function Hero() {
     gsap.registerPlugin(ScrollTrigger);
     setCanvasSize();
 
-    const lenis = new Lenis();
-
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
-
     const images: HTMLImageElement[] = [];
     let loadedCount = 0;
 
@@ -109,7 +101,7 @@ export default function Hero() {
       ScrollTrigger.create({
         trigger: ".hero",
         start: "top top",
-        end: `+=${window.innerHeight * 7}px`,
+        end: `+=${window.innerHeight * 2.5}px`,
         pin: true,
         pinSpacing: true,
         scrub: 1,
@@ -119,6 +111,24 @@ export default function Hero() {
           const targetFrame = Math.round(animationProgress * (FRAME_COUNT - 1));
           videoFrames.current.frame = targetFrame;
           render();
+
+          if (contentRef.current) {
+            if (progress <= 0.8) {
+              const zProgress = progress / 0.1;
+              const translateZ = zProgress * -600;
+              let opacity = 1;
+              if (progress >= 0.2) {
+                const fadeProgress = Math.min((progress - 0.5) / (0.25 - 0.2), 1);
+                opacity = 1 - fadeProgress;
+              }
+              gsap.set(contentRef.current, {
+                transform: `translate(-50%, -50%) translateZ(${translateZ}px)`,
+                opacity,
+              });
+            } else {
+              gsap.set(contentRef.current, { opacity: 0 });
+            }
+          }
         },
       });
     }
@@ -136,13 +146,19 @@ export default function Hero() {
       window.removeEventListener("resize", handleResize);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-    // eslint-disable-next-line
   }, []);
 
-  // JSX
   return (
-    <section className="hero">
-      <canvas ref={canvasRef} className="w-full h-full object-cover grayscale-85"/>
+    <section className="hero relative bg-gradient-to-t from-red-500 to-foreground">
+      <canvas ref={canvasRef} className="w-full h-full object-cover grayscale-90 -z-1 " />
+      <div className="w-full py-2 transform-3d perspective-distant h-full fixed top-0">
+        <div ref={contentRef} className="absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full origin-center will-change-transform text-background">
+          <h1 className="text-[11rem] leading-[105%] mb-[1rem] font-bold -tracking-two">BOLD IDEAS. <br /> BRILLIANT DESIGN.</h1>
+
+          <p className="text-[4rem] leading-[110%] font-medium -tracking-two">Make a <span className="bg-background text-foreground px-[1rem]">statement.</span> Build confidence. <br /> Impress your audience.</p>
+        </div>
+      </div>
+
     </section>
   );
 }
