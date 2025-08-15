@@ -2,6 +2,8 @@
 
 <!-- add youtube link here -->
 
+<img height="420" src="public/demo-img.png?raw=true" alt="Demo Image" />
+
 <!-- ![](gif link) -->
 
 ## Features
