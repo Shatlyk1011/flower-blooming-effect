@@ -2,6 +2,7 @@
 
 <!-- add youtube link here -->
 
+<video height="420" control src="public/github-demo.mp4" alt="Demo Video" />
 
 
 ## Features
