@@ -4,7 +4,6 @@
 
 <video height="420" control src="public/github-demo.mp4" alt="Demo Video" />
 
-
 ## Features
 
 * Scroll-Driven Frame Animation: Maps scroll progress to video frames for a seamless playback illusion.
