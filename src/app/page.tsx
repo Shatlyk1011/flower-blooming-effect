@@ -1,7 +1,12 @@
 'use client'
 
+import Hero from "@/components/Hero";
+import ReactLenis from "lenis/react";
+
 export default function Home() {
   return (
-    <p>main page</p>
+    <ReactLenis root options={{ lerp: 0.1 }}>
+      <Hero />
+    </ReactLenis>
   );
 }
