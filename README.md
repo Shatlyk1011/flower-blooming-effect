@@ -1,10 +1,10 @@
 # Scroll-Driven Video Animation Effect in React
 
-<!-- add youtube link here -->
 
 <img height="420" src="public/demo-img.png?raw=true" alt="Demo Image" />
 
-<!-- ![](gif link) -->
+>[!note]
+>Watch my [YouTube tutorial](https://link-here), where we'll build this entire component from scratch step by step.
 
 ## Features
 
