@@ -4,7 +4,7 @@
 <img height="420" src="public/demo-img.png?raw=true" alt="Demo Image" />
 
 >[!note]
->Watch my [YouTube tutorial](https://link-here), where we'll build this entire component from scratch step by step.
+>Watch my [YouTube tutorial](https://www.youtube.com/watch?v=fTSixGpVfds), where we'll build this entire component from scratch step by step.
 
 ## Features
 
